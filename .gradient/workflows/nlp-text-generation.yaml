@@ -18,9 +18,10 @@ on:
       only: main
 
 jobs:
+
   cloneRepo:
     resources:
-      instance-type: C5
+      instance-type: C4
     outputs:
       repo:
         type: volume
@@ -29,9 +30,9 @@ jobs:
       url: context.event.github.url
       ref: context.event.github.ref
 
-  generate-model:
+  generateText:
     resources:
-      instance-type: A6000
+      instance-type: C5
     needs:
       - cloneRepo
     inputs:
@@ -40,12 +41,16 @@ jobs:
       generatedText:
         type: dataset
         with:
-          ref: sigmodel
+          ref: demo-dataset
     uses: script@v1
     with:
       script: |-
-        pip3 install -U -r requirements.txt
+        cp -R /inputs/repo /nlp
+        cd /nlp
+        pip3 install -U transformers
         python3 model.py
+        mv output.txt /outputs/generatedText
+        ls "-aFlR" /outputs/generatedText
       image: paperspace/transformers-gpu:0.4.0
 
 # Appendix: Extra details
