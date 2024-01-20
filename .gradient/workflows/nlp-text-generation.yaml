@@ -51,7 +51,7 @@ jobs:
         python3 model.py
         mv output.txt /outputs/generatedText
         ls "-aFlR" /outputs/generatedText
-      image: paperspace/transformers-gpu:0.4.0
+      image: apidsai/base:24.02a-cuda12.0-py3.10
 
 # Appendix: Extra details
 #
