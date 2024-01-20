@@ -30,7 +30,7 @@ jobs:
       url: context.event.github.url
       ref: context.event.github.ref
 
-  base-model:
+  baseModel:
     resources:
       instance-type: C4
     needs:
@@ -38,12 +38,12 @@ jobs:
     inputs:
       repo: cloneRepo.outputs.repo
     outputs:
-      base-model:
+      base:
         type: volume
         ref: spanish-instruct
     env:
       DOWNLOAD_MODEL_REPOSITORY: "NousResearch/Nous-Hermes-2-Mixtral-8x7B-DPO"
-      DOWNLOAD_MODEL_LOCAL_PATH: "/outputs/base-model"
+      DOWNLOAD_MODEL_LOCAL_PATH: "/outputs/base"
       HF_HUB_ENABLE_HF_TRANSFER: "1"
     with:
       script: |-
