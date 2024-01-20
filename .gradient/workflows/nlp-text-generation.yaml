@@ -57,7 +57,7 @@ jobs:
           optimum[onnxruntime]@git+https://github.com/huggingface/optimum.git \
           bitsandbytes \
           hf-transfer
-        python3 /inputs/repo/download-model.py
+        python3 /inputs/repo/download_model.py
       image: nvcr.io/nvidia/pytorch:23.12-py3
 
 # Appendix: Extra details
