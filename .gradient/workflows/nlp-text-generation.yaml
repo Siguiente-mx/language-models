@@ -41,6 +41,7 @@ jobs:
       BASE_MODEL_PATH: "NousResearch/Nous-Hermes-2-Mixtral-8x7B-DPO"
       HF_MODEL_EXPORT_PATH: "/outputs/base-model"
       ONNX_MODEL_EXPORT_PATH: "/outputs/onnyx-model"
+      HF_HUB_ENABLE_HF_TRANSFER: "1"
     outputs:
       base-model:
         type: dataset
@@ -54,6 +55,7 @@ jobs:
         pip3 install git+https://github.com/huggingface/transformers.git
         pip3 install git+https://github.com/huggingface/accelerate.git
         pip3 install -U bitsandbytes
+        pip3 install -U hr-transfer
         python3 -m pip install optimum[onnxruntime]@git+https://github.com/huggingface/optimum.git
         python3 /inputs/repo/model.py
       image: nvcr.io/nvidia/pytorch:23.12-py3
