@@ -1,4 +1,0 @@
-transformers @ git+https://github.com/huggingface/transformers.git
-accelerate @ git+https://github.com/huggingface/accelerate.git
-bitsandbytes
-optimum[exporters]
