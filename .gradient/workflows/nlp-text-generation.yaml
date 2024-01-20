@@ -32,7 +32,7 @@ jobs:
 
   generateText:
     resources:
-      instance-type: C5
+      instance-type: A6000
     needs:
       - cloneRepo
     inputs:
@@ -46,6 +46,7 @@ jobs:
     with:
       script: |-
         apt update && apt install -y git
+        python3 -m pip install --upgrade pip
         pip3 install git+https://github.com/huggingface/transformers.git
         pip3 install git+https://github.com/huggingface/accelerate.git
         python3 -m pip install optimum[onnxruntime]@git+https://github.com/huggingface/optimum.git
