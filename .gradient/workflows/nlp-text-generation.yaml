@@ -21,7 +21,7 @@ jobs:
 
   cloneRepo:
     resources:
-      instance-type: C7
+      instance-type: C4
     outputs:
       repo:
         type: volume
@@ -32,7 +32,7 @@ jobs:
 
   base-model:
     resources:
-      instance-type: C7
+      instance-type: C4
     needs:
       - cloneRepo
     inputs:
@@ -54,7 +54,7 @@ jobs:
 
   executor-model:
     resources:
-      instance-type: C7
+      instance-type: C4
     needs:
       - cloneRepo
     inputs:
