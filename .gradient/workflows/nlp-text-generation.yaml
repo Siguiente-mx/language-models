@@ -41,11 +41,11 @@ jobs:
       base-model:
         type: dataset
         with:
-          ref: dsczfhrck2156jc
+          ref: spanish-instruct
     env:
-      DOWNLOAD_MODEL_REPOSITORY: NousResearch/Nous-Hermes-2-Mixtral-8x7B-DPO
-      DOWNLOAD_MODEL_LOCAL_PATH: /outputs/base-model
-      HF_HUB_ENABLE_HF_TRANSFER: 1
+      DOWNLOAD_MODEL_REPOSITORY: "NousResearch/Nous-Hermes-2-Mixtral-8x7B-DPO"
+      DOWNLOAD_MODEL_LOCAL_PATH: "/outputs/base-model"
+      HF_HUB_ENABLE_HF_TRANSFER: "1"
     with:
       script: |-
         pip3 install --upgrade huggingface-hub hf-transfer
@@ -63,11 +63,11 @@ jobs:
       executor-model:
         type: dataset
         with:
-          ref: dsczfhrck2156jc
+          ref: spanish-instruct
     env:
-      DOWNLOAD_MODEL_REPOSITORY: meetkai/functionary-medium-v2.2
-      DOWNLOAD_MODEL_LOCAL_PATH: /outputs/executor-model
-      HF_HUB_ENABLE_HF_TRANSFER: 1
+      DOWNLOAD_MODEL_REPOSITORY: "meetkai/functionary-medium-v2.2"
+      DOWNLOAD_MODEL_LOCAL_PATH: "/outputs/executor-model"
+      HF_HUB_ENABLE_HF_TRANSFER: "1"
     with:
       script: |-
         pip3 install --upgrade huggingface-hub hf-transfer
