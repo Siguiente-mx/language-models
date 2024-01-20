@@ -1,13 +1,14 @@
-import torch
+from message import system_message, user_message
 from optimum.onnxruntime import ORTModelForSequenceClassification
-from transformers import set_seed, MixtralForSequenceClassification, AutoTokenizer, BitsAndBytesConfig
+from transformers import MixtralForSequenceClassification, AutoTokenizer, BitsAndBytesConfig
 from os import environ
 
 BASE_MODEL_PATH = environ.get("BASE_MODEL_PATH")
 HF_MODEL_EXPORT_PATH = environ.get("HF_MODEL_EXPORT_PATH")
 ONNX_MODEL_EXPORT_PATH = environ.get("ONNX_MODEL_EXPORT_PATH")
+SYSTEM_PROMPT = environ.get("SYSTEM_PROMPT")
 
-def get_model(export = False):
+def get_model():
     quantization_config = BitsAndBytesConfig(
         load_in_4bit=True
     )
@@ -15,8 +16,7 @@ def get_model(export = False):
         BASE_MODEL_PATH, 
         quantization_config=quantization_config,
         low_cpu_mem_usage=True,
-        device_map="auto",
-        export=export
+        device_map="auto"
     )
     tokenizer = AutoTokenizer.from_pretrained(BASE_MODEL_PATH)
     return model, tokenizer
@@ -26,15 +26,11 @@ def get_onnx_model_format():
     AutoTokenizer.from_pretrained(HF_MODEL_EXPORT_PATH).save_pretrained(ONNX_MODEL_EXPORT_PATH)
     
 if __name__ == "__main__":
-    [model, tokenizer] = get_model(export=True)
-    
-    set_seed(0)
+    [model, tokenizer] = get_model()
+
     messages = [
-        {
-            "role": "system",
-            "content": "You are a friendly chatbot who always responds in the style of a thug",
-        },
-        {"role": "user", "content": "How many helicopters can a human eat in one sitting?"},
+        system_message(SYSTEM_PROMPT),
+        user_message("Cuentame sobre la NAFTA, desde la perspectiva de un mexicano en Quintana Roo."),
     ]
     
     model_inputs = tokenizer.apply_chat_template(messages, add_generation_prompt=True, return_tensors="pt").to("cuda")
