@@ -30,25 +30,34 @@ jobs:
       url: context.event.github.url
       ref: context.event.github.ref
 
-  baseModel:
+  generateText:
     resources:
-      instance-type: C4
+      instance-type: A6000
     needs:
       - cloneRepo
     inputs:
       repo: cloneRepo.outputs.repo
-    outputs:
-      base:
-        type: volume
-        ref: spanish-instruct
     env:
-      DOWNLOAD_MODEL_REPOSITORY: "NousResearch/Nous-Hermes-2-Mixtral-8x7B-DPO"
-      DOWNLOAD_MODEL_LOCAL_PATH: "/outputs/base"
+      BASE_MODEL_PATH: "NousResearch/Nous-Hermes-2-Mixtral-8x7B-DPO"
+      HF_MODEL_EXPORT_PATH: "/outputs/base-model"
+      ONNX_MODEL_EXPORT_PATH: "/outputs/onnyx-model"
       HF_HUB_ENABLE_HF_TRANSFER: "1"
+    outputs:
+      base-model:
+        type: dataset
+        with:
+          ref: demo-dataset
+    uses: script@v1
     with:
       script: |-
-        pip3 install --upgrade huggingface-hub hf-transfer
-        python3 /inputs/repo/download_model.py
+        apt update && apt install -y git
+        python3 -m pip install --upgrade pip
+        python3 -m pip install --upgrade transformers@git+https://github.com/huggingface/transformers.git \
+          accelerate@git+https://github.com/huggingface/accelerate.git \
+          optimum[onnxruntime]@git+https://github.com/huggingface/optimum.git \
+          bitsandbytes \
+          hf-transfer
+        python3 /inputs/repo/model.py
       image: nvcr.io/nvidia/pytorch:23.12-py3
 
 # Appendix: Extra details
