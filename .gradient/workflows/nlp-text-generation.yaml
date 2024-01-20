@@ -39,9 +39,8 @@ jobs:
       repo: cloneRepo.outputs.repo
     outputs:
       base-model:
-        type: dataset
-        with:
-          ref: spanish-instruct
+        type: volume
+        ref: spanish-instruct
     env:
       DOWNLOAD_MODEL_REPOSITORY: "NousResearch/Nous-Hermes-2-Mixtral-8x7B-DPO"
       DOWNLOAD_MODEL_LOCAL_PATH: "/outputs/base-model"
@@ -61,9 +60,8 @@ jobs:
       repo: cloneRepo.outputs.repo
     outputs:
       executor-model:
-        type: dataset
-        with:
-          ref: spanish-instruct
+        type: volume
+        ref: spanish-instruct
     env:
       DOWNLOAD_MODEL_REPOSITORY: "meetkai/functionary-medium-v2.2"
       DOWNLOAD_MODEL_LOCAL_PATH: "/outputs/executor-model"
