@@ -21,7 +21,7 @@ jobs:
 
   cloneRepo:
     resources:
-      instance-type: C4
+      instance-type: C7
     outputs:
       repo:
         type: volume
@@ -30,9 +30,9 @@ jobs:
       url: context.event.github.url
       ref: context.event.github.ref
 
-  generateText:
+  generate-model:
     resources:
-      instance-type: C5
+      instance-type: A100-80G
     needs:
       - cloneRepo
     inputs:
@@ -41,17 +41,13 @@ jobs:
       generatedText:
         type: dataset
         with:
-          ref: demo-dataset
+          ref: sigmodel
     uses: script@v1
     with:
       script: |-
-        cp -R /inputs/repo /nlp
-        cd /nlp
-        pip3 install -U transformers
-        python3 nlp_text_generation.py
-        mv output.txt /outputs/generatedText
-        ls "-aFlR" /outputs/generatedText
-      image: paperspace/transformers-gpu:0.4.0
+        pip3 install -U -r requirements.txt
+        python3 model.py
+      image: rapidsai/base:24.02a-cuda12.0-py3.10
 
 # Appendix: Extra details
 #
