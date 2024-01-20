@@ -55,7 +55,7 @@ jobs:
         pip3 install git+https://github.com/huggingface/transformers.git
         pip3 install git+https://github.com/huggingface/accelerate.git
         pip3 install -U bitsandbytes
-        pip3 install -U hr-transfer
+        pip3 install -U hf-transfer
         python3 -m pip install optimum[onnxruntime]@git+https://github.com/huggingface/optimum.git
         python3 /inputs/repo/model.py
       image: nvcr.io/nvidia/pytorch:23.12-py3
