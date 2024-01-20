@@ -51,7 +51,7 @@ jobs:
         python3 model.py
         mv output.txt /outputs/generatedText
         ls "-aFlR" /outputs/generatedText
-      image: apidsai/base:24.02a-cuda12.0-py3.10
+      image: nvcr.io/nvidia/rapidsai/base:23.12-cuda12.0-py3.10
 
 # Appendix: Extra details
 #
