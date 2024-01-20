@@ -6,8 +6,7 @@ def download_model(repository: str, local_path: str):
   makedirs(local_path, exist_ok=True)
   snapshot_download(
     repository,
-    local_dir=local_path,
-    ignore_patterns="*.pt"
+    local_dir=local_path
   )
   move_cache()
 
