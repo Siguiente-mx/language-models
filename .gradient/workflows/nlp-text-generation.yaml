@@ -47,7 +47,7 @@ jobs:
       script: |-
         cp -R /inputs/repo /nlp
         cd /nlp
-        pip3 install -U transformers
+        pip3 install -r requirements.txt
         python3 model.py
         mv output.txt /outputs/generatedText
         ls "-aFlR" /outputs/generatedText
