@@ -46,7 +46,7 @@ jobs:
       script: |-
         pip3 install -U -r requirements.txt
         python3 model.py
-      image: rapidsai/base:24.02a-cuda12.0-py3.10
+      image: paperspace/transformers-gpu:0.4.0
 
 # Appendix: Extra details
 #
