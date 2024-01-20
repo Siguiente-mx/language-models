@@ -18,10 +18,9 @@ on:
       only: main
 
 jobs:
-
   cloneRepo:
     resources:
-      instance-type: C7
+      instance-type: C5
     outputs:
       repo:
         type: volume
@@ -32,7 +31,7 @@ jobs:
 
   generate-model:
     resources:
-      instance-type: A100-80G
+      instance-type: A6000
     needs:
       - cloneRepo
     inputs:
