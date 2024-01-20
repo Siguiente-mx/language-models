@@ -32,7 +32,7 @@ jobs:
 
   generateText:
     resources:
-      instance-type: A6000
+      instance-type: C4
     needs:
       - cloneRepo
     inputs:
@@ -41,7 +41,6 @@ jobs:
       DOWNLOAD_MODEL_REPOSITORY: "NousResearch/Nous-Hermes-2-Mixtral-8x7B-DPO"
       DOWNLOAD_MODEL_LOCAL_PATH: "/outputs/base-model"
       ONNX_MODEL_EXPORT_PATH: "/outputs/onnyx-model"
-      HF_HUB_ENABLE_HF_TRANSFER: "1"
     outputs:
       base-model:
         type: dataset
@@ -57,7 +56,7 @@ jobs:
           optimum[onnxruntime]@git+https://github.com/huggingface/optimum.git \
           bitsandbytes \
           hf-transfer
-        python3 /inputs/repo/download_model.py
+        HF_HUB_ENABLE_HF_TRANSFER=1 python3 /inputs/repo/download_model.py
       image: nvcr.io/nvidia/pytorch:23.12-py3
 
 # Appendix: Extra details

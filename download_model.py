@@ -3,7 +3,6 @@ from transformers.utils import move_cache
 from os import makedirs, environ
 
 def download_model(repository: str, local_path: str):
-  makedirs(local_path, exist_ok=True)
   snapshot_download(
     repository,
     local_dir=local_path
