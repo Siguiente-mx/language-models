@@ -57,8 +57,6 @@ jobs:
         pip3 install -U bitsandbytes hf-transfer
         python3 -m pip install optimum[onnxruntime]@git+https://github.com/huggingface/optimum.git
         python3 /inputs/repo/model.py
-        mv output.txt /outputs/generatedText
-        ls "-aFlR" /outputs/generatedText
       image: nvcr.io/nvidia/pytorch:23.12-py3
 
 # Appendix: Extra details
